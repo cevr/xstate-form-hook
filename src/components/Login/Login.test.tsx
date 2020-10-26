@@ -1,19 +1,19 @@
 import * as React from "react";
 import { render, fireEvent } from "@testing-library/react";
-import { rest } from "msw";
+import { ApolloProvider } from "@apollo/client";
 
-import App from "./App";
-import { server } from "./mockServer";
-
-// used to provide a next tick when needed
-const nextTick = (ms?: number) =>
-  new Promise((resolve) => setTimeout(resolve, ms));
+import { client } from "client";
+import Login from "./Login";
 
 function renderApp() {
-  return render(<App />);
+  return render(
+    <ApolloProvider client={client}>
+      <Login />
+    </ApolloProvider>
+  );
 }
 
-describe("<App />", () => {
+describe("<Login />", () => {
   it("renders", () => {
     renderApp();
   });
@@ -37,12 +37,6 @@ describe("<App />", () => {
   });
 
   it("displays a loading state when signing in", async () => {
-    server.use(
-      rest.post("/login", (req, res, ctx) =>
-        res(ctx.delay(100), ctx.status(200), ctx.json(req.body))
-      )
-    );
-
     const screen = renderApp();
     const usernameInput = screen.getByLabelText("Username");
     const passwordInput = screen.getByLabelText("Password");
@@ -83,8 +77,6 @@ describe("<App />", () => {
     fireEvent.change(passwordInput, { target: { value: "dev" } });
 
     fireEvent.click(screen.getByLabelText(/throw error/i));
-    // ensures that the setShouldError is comitted
-    await nextTick();
 
     fireEvent.click(submitButton);
 

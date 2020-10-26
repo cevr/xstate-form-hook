@@ -66,10 +66,14 @@ function useForm<InitialValues extends object, OnSubmitResponse>({
       onChange: (
         event: React.ChangeEvent<FormElement> | React.FormEvent<FormElement>
       ) => {
+        const target = event.target as FormElement;
         send({
           name,
           type: FormMachineEventTypes.CHANGE,
-          value: (event.target as any).value,
+          value:
+            target.type === "checkbox"
+              ? (target as HTMLInputElement).checked
+              : target.value,
         });
       },
       onBlur: (event: React.FocusEvent<FormElement>) => {
