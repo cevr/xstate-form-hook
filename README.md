@@ -5,7 +5,7 @@ Ensure you have dependencies installed!
 yarn
 ```
 
-To run simply type:
+To run:
 ```bash
 yarn start
 ```
