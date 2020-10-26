@@ -1,6 +1,6 @@
 ## A custom form hook using xstate
 
-Ensure you have dependencies installed!
+Ensure you have dependencies installed:
 
 ```bash
 yarn
