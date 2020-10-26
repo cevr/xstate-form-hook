@@ -73,7 +73,6 @@ const setSubmitError = x.assign({
 const onChangeActions = x.merge<FormMachineContext>(resetError, setValue);
 
 // see state-chart here https://xstate.js.org/viz/?gist=f2f83bbd2ba3bd2ba1d9b9153abcaaf3
-// if you change this state machine, change the link above
 const createFormMachine = () =>
   x.createMachine<FormMachineContext>(
     x.states(
