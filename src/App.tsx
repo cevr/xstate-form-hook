@@ -1,6 +1,6 @@
 import React from "react";
 
-import Login from "./components/Login";
+import { Login } from "./components";
 import { server } from "./mocks/web";
 
 function App() {
