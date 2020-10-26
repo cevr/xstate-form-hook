@@ -1,6 +1,4 @@
-## A custom form hook using xstate
-
-Ensure you have dependencies installed:
+> A small app that uses MSW, xstate, and apollo
 
 ```bash
 yarn
